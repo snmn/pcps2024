@@ -10,58 +10,66 @@ class dashboardPage extends StatefulWidget {
 class _dashboardPageState extends State<dashboardPage> {
 
   horizontalscollfunc(var size,var color){
-    return Container(
-      width: size.width/1.5,
-      height: size.height/5,
-      margin: EdgeInsets.only(left: 5),
-      decoration: BoxDecoration(
-          color: Color(color),
-          borderRadius: BorderRadius.circular(20)
-      ),
-      child: Stack(
-        children: [
-          Container(
-            height: size.height/5,
-            width: size.width/1.5,
-            child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),child:
-            Image.network("https://paultan.org/image/2020/12/Volkswagen-China-production-630x399.jpg"
-            ,fit: BoxFit.cover,)),
-           //   Image.asset("images/bg.png",fit: BoxFit.cover,)),
-          ),
-          Positioned(
-            bottom: 30,left: 15,
-            child: Container(
-              width: size.width/2,
-              decoration: BoxDecoration(
-                color: Colors.black12
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  const detailPage()),
+        );
+      },
+      child: Container(
+        width: size.width/1.5,
+        height: size.height/5,
+        margin: EdgeInsets.only(left: 5),
+        decoration: BoxDecoration(
+            color: Color(color),
+            borderRadius: BorderRadius.circular(20)
+        ),
+        child: Stack(
+          children: [
+            Container(
+              height: size.height/5,
+              width: size.width/1.5,
+              child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),child:
+              Image.network("https://paultan.org/image/2020/12/Volkswagen-China-production-630x399.jpg"
+              ,fit: BoxFit.cover,)),
+             //   Image.asset("images/bg.png",fit: BoxFit.cover,)),
+            ),
+            Positioned(
+              bottom: 30,left: 15,
+              child: Container(
+                width: size.width/2,
+                decoration: BoxDecoration(
+                  color: Colors.black12
+                ),
+                child: Text("Dow Jones Futures: Meta, Apple, "
+                    "Tesla Lead New Buys In Big Rally. Pay Attention "
+                    "To This Key Shift"
+                    ,style: TextStyle(color: Colors.white,
+                      fontSize: 20,fontWeight: FontWeight.bold)
+                  ,maxLines: 2,overflow: TextOverflow.ellipsis,),
               ),
-              child: Text("Dow Jones Futures: Meta, Apple, "
-                  "Tesla Lead New Buys In Big Rally. Pay Attention "
-                  "To This Key Shift"
+            ),
+            Positioned(
+              bottom: 10,left: 15,
+              child: Container(
+                width: size.width/2,
+                color: Colors.black12,
+                child: Text("Sept 20, 2024"
                   ,style: TextStyle(color: Colors.white,
-                    fontSize: 20,fontWeight: FontWeight.bold)
-                ,maxLines: 2,overflow: TextOverflow.ellipsis,),
+                      fontSize: 14,fontWeight: FontWeight.normal)
+                  ,maxLines: 1,overflow: TextOverflow.ellipsis,),
+              ),
             ),
-          ),
-          Positioned(
-            bottom: 10,left: 15,
-            child: Container(
-              width: size.width/2,
-              color: Colors.black12,
-              child: Text("Sept 20, 2024"
-                ,style: TextStyle(color: Colors.white,
-                    fontSize: 14,fontWeight: FontWeight.normal)
-                ,maxLines: 1,overflow: TextOverflow.ellipsis,),
-            ),
-          ),
-          Positioned(
-            right: 5,
-            bottom: 5,
-            child: Icon(Icons.play_circle,size: 30,
-            color: Colors.white,),
-          )
-        ],
+            Positioned(
+              right: 5,
+              bottom: 5,
+              child: Icon(Icons.play_circle,size: 30,
+              color: Colors.white,),
+            )
+          ],
+        ),
       ),
     );
   }
