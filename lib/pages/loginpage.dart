@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'dashboard.dart';
+import 'dashboardpage.dart';
+
 class loginPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -67,16 +70,24 @@ class loginPageState extends State<loginPage>{
                     ),
                   ),
                   SizedBox(height: 20,),
-                  Container(
-                    height: 50,
-                    width: size.width/2,
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(15)
-                    ),
-                    child: Center(
-                      child: Text("Signin",style: TextStyle(color:
-                      Colors.white,fontSize: 12),),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>  const dashboardPage()),
+                      );
+                    },
+                    child: Container(
+                      height: 50,
+                      width: size.width/2,
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(15)
+                      ),
+                      child: Center(
+                        child: Text("Signin",style: TextStyle(color:
+                        Colors.white,fontSize: 12),),
+                      ),
                     ),
                   )
                 ],
