@@ -74,7 +74,7 @@ class loginPageState extends State<loginPage>{
                     onTap: (){
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) =>  const dashboardPage()),
+                        MaterialPageRoute(builder: (context) =>  dashboardPage()),
                       );
                     },
                     child: Container(

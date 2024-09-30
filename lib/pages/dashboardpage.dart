@@ -11,13 +11,22 @@ class DashboardpageState extends State<Dashboardpage>{
   horizontalscrollitem(var size, int color){
     return Stack(
       children: [
-        Container(
-          height: size.height/5,
-          width: size.width/1.5,
-          decoration: BoxDecoration(
-            color: Color(color),
-            borderRadius: BorderRadius.circular(15),
-
+        Padding(
+          padding: const EdgeInsets.only(left:8.0),
+          child: Container(
+            height: size.height/5,
+            width: size.width/1.5,
+            decoration: BoxDecoration(
+              color: Color(color),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.network("https://paultan.org/image/2020/12/Volkswagen-China-production-630x399.jpg"
+              ,fit: BoxFit.cover,),
+              // Image.asset("images/bg.png"
+              // ,fit: BoxFit.cover,),
+            ),
           ),
         ),
 
@@ -69,21 +78,15 @@ class DashboardpageState extends State<Dashboardpage>{
         width: size.width,
         child: Column(
           children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  SizedBox(width: 10,),
-                  horizontalscrollitem(size, 0xffff55555),
-                  SizedBox(width: 10,),
-                  horizontalscrollitem(size, 0xfff333555),
-                  SizedBox(width: 10,),
-                  horizontalscrollitem(size, 0xff222f555),
-                  SizedBox(width: 10,),
-                  horizontalscrollitem(size, 0xffffff555),
-                  SizedBox(width: 10,),
-                  horizontalscrollitem(size, 0xffffff555),
-                ],
+            Container(
+            width: size.width,
+              height: size.height/5,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 100,
+                itemBuilder: (context, index) {
+                  return horizontalscrollitem(size, 0xff5121fff);
+                },
               ),
             ),
             SizedBox(height: 10,),

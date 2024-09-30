@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:lab1/pages/detailPage.dart';
 
 class dashboardPage extends StatefulWidget {
   const dashboardPage({super.key});
 
   @override
-  State<dashboardPage> createState() => _dashboardPageState();
+  State<dashboardPage> createState() => dashboardPageState();
 }
 
-class _dashboardPageState extends State<dashboardPage> {
+class dashboardPageState extends State<dashboardPage> {
 
   horizontalscollfunc(var size,var color){
     return GestureDetector(
       onTap: (){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  const detailPage()),
+          MaterialPageRoute(builder: (context) =>  const Detailpage()),
         );
       },
       child: Container(
@@ -75,7 +76,7 @@ class _dashboardPageState extends State<dashboardPage> {
   }
 
 
-  verticalscollfunc(var size){
+  static verticalscollfunc(var size){
     return Container(
       width: size.width/1.1,
  //     height: size.height/5,
