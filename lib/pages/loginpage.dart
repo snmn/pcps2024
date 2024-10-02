@@ -15,9 +15,11 @@ class loginPageState extends State<loginPage>{
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    GetApi.newsApiCall();
+    GetApi().getNewsApicall();
   }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
