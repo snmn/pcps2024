@@ -51,7 +51,6 @@ class GetApi{
       var jsonData = json.decode(response.body);
       NewsApi newsdata = NewsApi.fromJson(jsonData);
       return newsdata;
-
     }else{
       return null;
     }

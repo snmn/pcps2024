@@ -12,14 +12,14 @@ class StaticValue {
   "articles": [
     {
       "source": {
-        "id": null,
+        "id": "2",
         "name": "Yahoo Entertainment"
       },
       "author": "Steve Dent",
       "title": "Tesla Semi fire required 50,000 gallons of water to extinguish",
       "description": "California firefighters needed to spray 50,000 gallons of water to extinguish a roadside Tesla Semi fire, the US National Transportation Safety Board announced in a preliminary report. Crews also used an aircraft to drop fire retardent in the",
       "url": "https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_2b92179c-f86d-4df6-9cc9-bc8e925e97db",
-      "urlToImage": null,
+      "urlToImage": "https://cdn.vox-cdn.com/thumbor/QJ0sPBAZ8DVpTMNZJ77XG9idZcw=/0x0:2040x1360/1200x628/filters:focal(1020x680:1021x681)/cdn.vox-cdn.com/uploads/chorus_asset/file/10752835/acastro_180430_1777_tesla_0001.jpg",
       "publishedAt": "2024-09-13T12:00:06Z",
       "content": "If you click 'Accept all', we and our partners, including 239 who are part of the IAB Transparency &amp; Consent Framework, will also store and/or access information on a device in other words, use."
     },
@@ -51,7 +51,7 @@ class StaticValue {
     },
     {
       "source": {
-        "id": null,
+        "id": "1",
         "name": "Gizmodo.com"
       },
       "author": "Matthew Gault",

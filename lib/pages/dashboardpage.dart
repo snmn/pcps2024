@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lab1/model/newsapi.dart';
+
+import '../api/get.dart';
 
 class Dashboardpage extends StatefulWidget{
   @override
@@ -8,7 +11,9 @@ class Dashboardpage extends StatefulWidget{
 }
 class DashboardpageState extends State<Dashboardpage>{
 
-  horizontalscrollitem(var size, int color){
+ late Future<NewsApi?> _futureNewsApi ;
+
+  horizontalscrollitem(var size, Articles articledata){
     return Stack(
       children: [
         Padding(
@@ -17,12 +22,12 @@ class DashboardpageState extends State<Dashboardpage>{
             height: size.height/5,
             width: size.width/1.5,
             decoration: BoxDecoration(
-              color: Color(color),
+          //    color: Color(color),
               borderRadius: BorderRadius.circular(15),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.network("https://paultan.org/image/2020/12/Volkswagen-China-production-630x399.jpg"
+              child: Image.network(articledata.urlToImage!
               ,fit: BoxFit.cover,),
               // Image.asset("images/bg.png"
               // ,fit: BoxFit.cover,),
@@ -35,7 +40,7 @@ class DashboardpageState extends State<Dashboardpage>{
           left: 15,
           child: Container(
             width: size.width/2,
-            child: Text("Todays news updates sept 2024",
+            child: Text(articledata.title!,
             style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,
             fontSize: 28,),overflow: TextOverflow.ellipsis,maxLines: 2,),
           ),
@@ -45,7 +50,7 @@ class DashboardpageState extends State<Dashboardpage>{
           left: 15,
           child: Container(
             width: size.width/2,
-            child: Text("23rd Sept 2024",
+            child: Text(articledata.publishedAt!,
               style: TextStyle(color: Colors.white,fontWeight: FontWeight.normal,
                 fontSize: 15,),overflow: TextOverflow.ellipsis,maxLines: 1,),
           ),
@@ -67,7 +72,12 @@ class DashboardpageState extends State<Dashboardpage>{
     );
   }
 
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _futureNewsApi =  GetApi().getNewsApicall();
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -78,38 +88,71 @@ class DashboardpageState extends State<Dashboardpage>{
         width: size.width,
         child: Column(
           children: [
-            Container(
-            width: size.width,
-              height: size.height/5,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 100,
-                itemBuilder: (context, index) {
-                  return horizontalscrollitem(size, 0xff5121fff);
-                },
-              ),
-            ),
-            SizedBox(height: 10,),
-            Container(
-              height: size.height/1.5,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  children: [
-                    SizedBox(height: 10,),
-                    verticalitem(size, 0xffff55555),
-                    SizedBox(height: 10,),
-                    verticalitem(size, 0xfff333555),
-                    SizedBox(height: 10,),
-                    verticalitem(size, 0xff222f555),
-                    SizedBox(height: 10,),
-                    verticalitem(size, 0xffffff555),
-                    SizedBox(height: 10,),
-                    verticalitem(size, 0xffffff555),
-                  ],
-                ),
-              ),
-            )
+            FutureBuilder(
+                future: _futureNewsApi,
+                builder: (BuildContext context, AsyncSnapshot snapshot){
+                  switch (snapshot.connectionState){
+                    case ConnectionState.none:
+                      return CircularProgressIndicator();
+                      // internet not working
+                    case ConnectionState.active:
+                      return CircularProgressIndicator();
+                      // progress bar //loading
+                    case ConnectionState.waiting:
+                      //loading
+                      return CircularProgressIndicator();
+                    case ConnectionState.done:
+                      //ui
+                      if(snapshot.hasData){
+
+                        NewsApi data = snapshot.data;
+                        return Column(
+                          children: [
+                            Container(
+                              width: size.width,
+                              height: size.height/5,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: data.articles!.length,
+                                itemBuilder: (context, index) {
+                                  return horizontalscrollitem(size, data.articles![index]);
+                                },
+                              ),
+                            ),
+                            SizedBox(height: 10,),
+                            Container(
+                              height: size.height/1.5,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 10,),
+                                    verticalitem(size, 0xffff55555),
+                                    SizedBox(height: 10,),
+                                    verticalitem(size, 0xfff333555),
+                                    SizedBox(height: 10,),
+                                    verticalitem(size, 0xff222f555),
+                                    SizedBox(height: 10,),
+                                    verticalitem(size, 0xffffff555),
+                                    SizedBox(height: 10,),
+                                    verticalitem(size, 0xffffff555),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        );
+                      }else{
+                        // no data
+                        return CircularProgressIndicator();
+                      }
+                  }
+                }),
+
+
+
+
+
           ],
         ),
       ),

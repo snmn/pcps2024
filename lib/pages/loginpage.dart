@@ -17,7 +17,7 @@ class loginPageState extends State<loginPage>{
   void initState() {
     // TODO: implement initState
     super.initState();
-    GetApi().getNewsApicall();
+
   }
 
   @override
