@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lab1/static.dart';
 
 import 'dashboard.dart';
 
@@ -29,7 +30,9 @@ class _DetailpageState extends State<Detailpage> {
                   color: Colors.black,
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(0),child:
-                  Image.network("https://paultan.org/image/2020/12/Volkswagen-China-production-630x399.jpg"
+                  Image.network(
+                    StaticValue.newsdetail!.urlToImage!
+                    //"https://paultan.org/image/2020/12/Volkswagen-China-production-630x399.jpg"
                     ,fit: BoxFit.cover,)),
                 ),
 
@@ -46,7 +49,7 @@ class _DetailpageState extends State<Detailpage> {
             Container(
               padding: EdgeInsets.only(top: 15,bottom: 10),
               width: size.width/1.1,
-              child: Text("Todays news updates sept 2024",
+              child: Text( StaticValue.newsdetail!.title!,
                 style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,
                   fontSize: 28,),overflow: TextOverflow.ellipsis,maxLines: 2,),
             ),
@@ -56,10 +59,10 @@ class _DetailpageState extends State<Detailpage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Season Maharjan",
+                  Text( StaticValue.newsdetail!.author!,
                     style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,
                       fontSize: 12,),overflow: TextOverflow.ellipsis,maxLines: 2,),
-                  Text("29th Sept 2024",
+                  Text( StaticValue.newsdetail!.publishedAt!,
                     style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,
                       fontSize: 12,),overflow: TextOverflow.ellipsis,maxLines: 2,)
                 ],
@@ -68,10 +71,7 @@ class _DetailpageState extends State<Detailpage> {
 
             Container(
               width: size.width/1.1,
-              child: Text("Todays news updates sept 2024Todays news updates "
-                  "sept 2024Todays news updates sept 2024Todays news updates "
-                  "sept 2024Todays news updates sept 2024Todays news "
-                  "updates sept 2024",
+              child: Text( StaticValue.newsdetail!.description!,
                 style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,
                   fontSize: 15,),textAlign: TextAlign.justify,overflow: TextOverflow.ellipsis,maxLines: 8,),
             ),
@@ -87,7 +87,7 @@ class _DetailpageState extends State<Detailpage> {
                 itemCount: 20,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
-                  return dashboardPageState.verticalscollfunc(size);
+                  return Container();//dashboardPageState.verticalscollfunc(size);
                 },
               ),
             ),

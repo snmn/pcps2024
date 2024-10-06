@@ -40,7 +40,7 @@ class DashboardpageState extends State<Dashboardpage>{
           left: 15,
           child: Container(
             width: size.width/2,
-            child: Text(articledata.title!,
+            child: Text(articledata!.title!,
             style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,
             fontSize: 28,),overflow: TextOverflow.ellipsis,maxLines: 2,),
           ),

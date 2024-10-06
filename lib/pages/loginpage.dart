@@ -13,12 +13,6 @@ class loginPage extends StatefulWidget{
 }
 class loginPageState extends State<loginPage>{
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-  }
 
   @override
   Widget build(BuildContext context) {
