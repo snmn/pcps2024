@@ -1,6 +1,18 @@
+import 'package:intl/intl.dart';
+
 import 'model/newsapi.dart';
 
 class StaticValue {
+
+  //datetimeformat converter
+  static String datetimeconverter(String datetimeutc){
+    DateTime parseDate = DateFormat("yyyy-MM-dd").parse(datetimeutc);
+    var inputDate = DateTime.parse(parseDate.toString());
+    DateFormat output =  DateFormat("d MMM,yyy");
+    var dateTime = output.format(inputDate);
+    return dateTime.toString();
+  }
+
   //endpoint baseURL
   static String baseURL = "newsapi.org";
 

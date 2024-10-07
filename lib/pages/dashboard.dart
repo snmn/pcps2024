@@ -66,7 +66,7 @@ class dashboardPageState extends State<dashboardPage> {
               child: Container(
                 width: size.width/2,
                 color: Colors.black12,
-                child:  Text(articledata.publishedAt!
+                child:  Text(StaticValue.datetimeconverter(articledata.publishedAt!)
                   ,style: TextStyle(color: Colors.white,
                       fontSize: 14,fontWeight: FontWeight.normal)
                   ,maxLines: 1,overflow: TextOverflow.ellipsis,),
@@ -85,76 +85,85 @@ class dashboardPageState extends State<dashboardPage> {
   }
 
 
-  static verticalscollfunc(var size, Articles articledata){
-    return Container(
-      width: size.width/1.1,
- //     height: size.height/5,
-      margin: const EdgeInsets.only(left: 5,top: 5,bottom: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Stack(
-            children: [
-              Container(
-                height: 100,
-                width: 100,
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),child:
-                Image.network(articledata.urlToImage!
-                  //"https://paultan.org/image/2020/12/Volkswagen-China-production-630x399.jpg"
-                  ,fit: BoxFit.cover,)),
-                //   Image.asset("images/bg.png",fit: BoxFit.cover,)),
-              ),
-              const Positioned(
-                right: 5,
-                bottom: 5,
-                child: Icon(Icons.play_circle,size: 30,
-                  color: Colors.white,),
-              )
-            ],
-          ),
-
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: size.width/2,
-
-                child: Text(articledata.title!
-                  ,style: TextStyle(color: Colors.black,
-                      fontSize: 20,fontWeight: FontWeight.bold)
-                  ,maxLines: 2,overflow: TextOverflow.ellipsis,),
-              ),
-
-              Container(
-                width: size.width/2,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.red,
-                      ),
-                      padding: EdgeInsets.only(left: 15,right: 15,top: 10,bottom: 10),
-                      child: Text(articledata.source!.name!,style: TextStyle(
-                          color: Colors.white,fontWeight: FontWeight.bold),maxLines: 1,),
-                    ),
-                     Container(
-                       width: 80,
-                       child: Text(articledata.publishedAt!,style: TextStyle(
-                          color: Colors.black,fontWeight: FontWeight.bold),maxLines: 1,),
-                     ),
-                  ],
+  static verticalscollfunc(context,var size, Articles articledata){
+    return GestureDetector(
+        onTap: (){
+          StaticValue.newsdetail = articledata;
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  const Detailpage()),
+          );
+        },
+      child: Container(
+        width: size.width/1.1,
+       //     height: size.height/5,
+        margin: const EdgeInsets.only(left: 5,top: 5,bottom: 5),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Stack(
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),child:
+                  Image.network(articledata.urlToImage!
+                    //"https://paultan.org/image/2020/12/Volkswagen-China-production-630x399.jpg"
+                    ,fit: BoxFit.cover,)),
+                  //   Image.asset("images/bg.png",fit: BoxFit.cover,)),
                 ),
-              ),
+                const Positioned(
+                  right: 5,
+                  bottom: 5,
+                  child: Icon(Icons.play_circle,size: 30,
+                    color: Colors.white,),
+                )
+              ],
+            ),
+
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: size.width/2,
+
+                  child: Text(articledata.title!
+                    ,style: TextStyle(color: Colors.black,
+                        fontSize: 20,fontWeight: FontWeight.bold)
+                    ,maxLines: 2,overflow: TextOverflow.ellipsis,),
+                ),
+
+                Container(
+                  width: size.width/2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.red,
+                        ),
+                        padding: EdgeInsets.only(left: 15,right: 15,top: 10,bottom: 10),
+                        child: Text(articledata.source!.name!,style: TextStyle(
+                            color: Colors.white,fontWeight: FontWeight.bold),maxLines: 1,),
+                      ),
+                       Container(
+                         width: 80,
+                         child: Text(StaticValue.datetimeconverter(articledata.publishedAt!),style: TextStyle(
+                            color: Colors.black,fontWeight: FontWeight.bold),maxLines: 1,),
+                       ),
+                    ],
+                  ),
+                ),
 
 
-            ],
-          )
+              ],
+            )
 
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -212,7 +221,7 @@ class dashboardPageState extends State<dashboardPage> {
                           itemCount: newsdata.articles!.length,
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
-                            return verticalscollfunc(size, newsdata.articles![index]);
+                            return verticalscollfunc(context,size, newsdata.articles![index]);
                           },
                         ),
                       ),
@@ -234,6 +243,7 @@ class dashboardPageState extends State<dashboardPage> {
 
         ],
       ),
+
     );
   }
 }

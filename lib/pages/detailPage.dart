@@ -36,7 +36,11 @@ class _DetailpageState extends State<Detailpage> {
                     ,fit: BoxFit.cover,)),
                 ),
 
-                Positioned(left: 15,top: 50,child: Icon(Icons.arrow_back_outlined,color: Colors.white,size: 30,)),
+                Positioned(left: 15,top: 50,child: GestureDetector(
+                    onTap: (){
+                  Navigator.pop(context);
+                },
+                    child: Icon(Icons.arrow_back_outlined,color: Colors.white,size: 30,))),
 
                 Positioned(right: 15,top: 50,child: Icon(Icons.share,color: Colors.white,size: 30,)),
 
@@ -62,7 +66,7 @@ class _DetailpageState extends State<Detailpage> {
                   Text( StaticValue.newsdetail!.author!,
                     style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,
                       fontSize: 12,),overflow: TextOverflow.ellipsis,maxLines: 2,),
-                  Text( StaticValue.newsdetail!.publishedAt!,
+                  Text(StaticValue.datetimeconverter( StaticValue.newsdetail!.publishedAt!),
                     style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,
                       fontSize: 12,),overflow: TextOverflow.ellipsis,maxLines: 2,)
                 ],
