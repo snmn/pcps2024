@@ -6,6 +6,9 @@ class StaticValue {
 
   //datetimeformat converter
   static String datetimeconverter(String datetimeutc){
+   // format string parse
+    // output format
+    //return string
     DateTime parseDate = DateFormat("yyyy-MM-dd").parse(datetimeutc);
     var inputDate = DateTime.parse(parseDate.toString());
     DateFormat output =  DateFormat("d MMM,yyy");
