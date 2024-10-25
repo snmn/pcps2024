@@ -117,6 +117,7 @@ class MapSampleState extends State<MapSample> {
             infoWindow: InfoWindow(
               title: "patan"
             ),
+
           )
         },
       ),
