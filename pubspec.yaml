@@ -35,6 +35,9 @@ dependencies:
   intl:
   google_maps_flutter:
   firebase_core: 3.0.0
+  cloud_firestore:
+  shared_preferences:
+  firebase_database:
 #  esewa_flutter_sdk:
 #    path: ./esewa_sdk/esewa_flutter_sdk
 

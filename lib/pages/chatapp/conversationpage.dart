@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:lab1/model/chatmodel.dart';
+import 'package:lab1/pages/chatapp/api/datalayer.dart';
 
 class Conversationpage extends StatefulWidget {
   const Conversationpage({super.key});
@@ -8,6 +14,7 @@ class Conversationpage extends StatefulWidget {
 }
 
 class _ConversationpageState extends State<Conversationpage> {
+
 
   leftsidedataitem(size) {
     return Container(
@@ -51,6 +58,24 @@ class _ConversationpageState extends State<Conversationpage> {
     );
   }
 
+
+  //addtorealtimedatabase
+  addtodb(String text,int type ) async {
+    String chatId = Timestamp.now().toString();
+    DatabaseReference ref = FirebaseDatabase.instance.ref("chat/$chatId");
+
+    await ref.set({
+      "userId1": "John",
+      "userId2": "18",
+      "username1": "",
+      "username2": "",
+      "address": "",
+      "text": text,
+      "type": "0", // 0 for text and 1 for image
+      "createdAt": DateTime.now().toIso8601String()
+    });
+  }
+
   TextEditingController textcontroller = TextEditingController();
   buttonwithtext(size){
     return Container(
@@ -62,7 +87,8 @@ class _ConversationpageState extends State<Conversationpage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            width: size.width/1.5,
+            padding: EdgeInsets.only(left: 20),
+            width: size.width/1.2,
             child: TextField(
               decoration: const InputDecoration(
                 border: InputBorder.none,
@@ -70,22 +96,34 @@ class _ConversationpageState extends State<Conversationpage> {
               style:const TextStyle(fontSize: 18,
                   fontWeight: FontWeight.normal,color: Colors.black87),
               maxLines: 1,
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
               controller: textcontroller,
               onEditingComplete: (){
+              addtodb(textcontroller.text, 0);
+              textcontroller.clear();
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 15.0,left: 5,top: 5,bottom: 5),
-            child: Icon(Icons.send,color: Colors.white,size: 22,),
+          GestureDetector(
+            onTap: (){
+              addtodb(textcontroller.text, 0);
+              textcontroller.clear();
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 15.0,left: 5,top: 5,bottom: 5),
+              child: Icon(Icons.send,color: Colors.white,size: 22,),
+            ),
           )
         ],
       ),
     );
   }
 
+  @override
+  void initState() {
+    super.initState();
 
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;

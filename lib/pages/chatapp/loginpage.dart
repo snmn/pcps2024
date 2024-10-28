@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lab1/pages/chatapp/chat.dart';
 import 'package:lab1/static.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class chatlogin extends StatefulWidget {
@@ -13,6 +16,34 @@ class chatlogin extends StatefulWidget {
 class _chatloginState extends State<chatlogin> {
 
   TextEditingController namecontroller = TextEditingController();
+
+  readfromstorage() async {
+    //store in sharef pref
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userid = await prefs.getString('userid');
+    String? username = await prefs.getString("username");
+    if (userid != null && username != null) {
+      // go to chat page
+      gotochatpage();
+    }
+  }
+
+  gotochatpage(){
+      //goto chat
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) =>  chat()),
+         (route) => false,
+      );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    readfromstorage();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -54,11 +85,29 @@ class _chatloginState extends State<chatlogin> {
             ),
             //button
             GestureDetector(
-              onTap: (){
-                Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>  chat()),
-                      );
+              onTap: () async {
+                if(namecontroller.text.isEmpty){
+                  // error msg
+                }else{
+                  String userid = DateTime.timestamp().toIso8601String();
+
+                  FirebaseFirestore.instance.collection('USERS').doc(userid).set({
+                    'name':namecontroller.text,
+                    'userId': userid
+                  });
+
+                 // store in sharef pref
+                  final SharedPreferences prefs = await SharedPreferences.getInstance();
+                  await prefs.setString('userid', userid);
+                  await prefs.setString("username", namecontroller.text);
+
+                  //goto chat
+                  gotochatpage();
+                }
+
+
+
+
               },
               child: Container(
                 height: 55,
