@@ -23,6 +23,7 @@ class _chatloginState extends State<chatlogin> {
     String? userid = await prefs.getString('userid');
     String? username = await prefs.getString("username");
     if (userid != null && username != null) {
+      StaticValue.username = username;
       // go to chat page
       gotochatpage();
     }
@@ -78,6 +79,7 @@ class _chatloginState extends State<chatlogin> {
                   controller: namecontroller,
                   onEditingComplete: (){
                   StaticValue.username = namecontroller.text;
+
                   },
 
                 ),
@@ -89,13 +91,12 @@ class _chatloginState extends State<chatlogin> {
                 if(namecontroller.text.isEmpty){
                   // error msg
                 }else{
-                  String userid = DateTime.timestamp().toIso8601String();
+                  String userid = DateTime.now().millisecondsSinceEpoch.toString();
 
                   FirebaseFirestore.instance.collection('USERS').doc(userid).set({
                     'name':namecontroller.text,
                     'userId': userid
                   });
-
                  // store in sharef pref
                   final SharedPreferences prefs = await SharedPreferences.getInstance();
                   await prefs.setString('userid', userid);

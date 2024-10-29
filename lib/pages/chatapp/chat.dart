@@ -69,7 +69,7 @@ class _chatState extends State<chat> {
         'name2': "BOT"+ DateTime.now().day.toString(),
         'userId1': "1",
         'userId2': "2", // Stores'
-        'datetime': DateTime.now().toIso8601String(),
+        'datetime': DateTime.now().millisecondsSinceEpoch.toString()
 
       });
       print("Conversation added successfully");
@@ -84,7 +84,7 @@ class _chatState extends State<chat> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //addConversation();
+  //  addConversation();
     futureconversationdata = Datalayer.getConversations();
   }
   @override
@@ -93,53 +93,70 @@ class _chatState extends State<chat> {
    return Scaffold(
 
      body:  SingleChildScrollView(
-       child: Column(
-         children: [
-           SizedBox(height: 55,),
-           Text("Random Chat Application",style: TextStyle(color: Colors.black,fontSize: 20),),
+       child: Container(
+         width: size.width,
+         child: Column(
+           mainAxisAlignment: MainAxisAlignment.start,
+           crossAxisAlignment:CrossAxisAlignment.center,
+           children: [
+             SizedBox(height: 55,),
+             Text("Random Chat Application",style: TextStyle(color: Colors.black,fontSize: 20),),
 
-           FutureBuilder(
-             future: futureconversationdata,
-             builder: (context, AsyncSnapshot<dynamic> snapshot) {
-               switch (snapshot.connectionState) {
-                 case ConnectionState.none:
-                 // network, server error
-                   return Container(
-                     height: size.height,
-                     width: size.width, child:
-                   const Center(child: Text("Server Error")),);
-                 case ConnectionState.active:
-                   return const CircularProgressIndicator();
-                 case ConnectionState.waiting:
-                   return const CircularProgressIndicator();
-                 case ConnectionState.done:
-                   List<ConversationModel>? dataa = snapshot.data;
-                   return (snapshot.data != null || snapshot.hasData)?
-                   Container(
-                     width: size.width,
-                     height: size.height/1.1,
-                     child: ListView.builder(
-                       scrollDirection: Axis.vertical,
-                       itemCount: dataa!.length,
-                       itemBuilder: (context, index) {
-                         return conversationitem(size,dataa[index]);
-                       },
-                     ),
-                   ):Container(
-                     height: size.height/1.2,
-                     width: size.width, child:
-                   const Center(child: Text("No Data Available")),);
-                 default:
-                   return Container(
-                     height: size.height,
-                     width: size.width, child:
-                   const Center(child: Text("Server Error")),);
+             FutureBuilder(
+               future: futureconversationdata,
+               builder: (context, AsyncSnapshot<dynamic> snapshot) {
+                 switch (snapshot.connectionState) {
+                   case ConnectionState.none:
+                   // network, server error
+                     return Container(
+                       height: size.height/2,
+                       width: size.width, child:
+                     const Center(child: Text("Server Error")),);
+                   case ConnectionState.active:
+                     return Container(
+                       height: size.height/2,
+                         child: Column(
+                           mainAxisAlignment: MainAxisAlignment.center,
+                       children: [
+                         const CircularProgressIndicator(),
+                       ],
+                     ));
+                   case ConnectionState.waiting:
+                     return Container(
+                         height: size.height/2,
+                         child: Column(
+                           mainAxisAlignment: MainAxisAlignment.center,
+                           children: [
+                             const CircularProgressIndicator(),
+                           ],
+                         ));                   case ConnectionState.done:
+                     List<ConversationModel>? dataa = snapshot.data;
+                     return (snapshot.data != null || snapshot.hasData)?
+                     Container(
+                       width: size.width,
+                       height: size.height/1.1,
+                       child: ListView.builder(
+                         scrollDirection: Axis.vertical,
+                         itemCount: dataa!.length,
+                         itemBuilder: (context, index) {
+                           return conversationitem(size,dataa[index]);
+                         },
+                       ),
+                     ):Container(
+                       height: size.height/1.2,
+                       width: size.width, child:
+                     const Center(child: Text("No Data Available")),);
+                   default:
+                     return Container(
+                       height: size.height/2,
+                       width: size.width, child:
+                     const Center(child: Text("Server Error")),);
+                 }
+               },
+             ),
 
-               }
-             },
-           ),
-
-         ],
+           ],
+         ),
        ),
      )
    );

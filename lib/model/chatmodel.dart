@@ -7,9 +7,8 @@ class ChatModel {
   String? text;
   String? type;
   String? createdAt;
-
-  ChatModel({this.userId1,this.userId2,this.username1,this.username2,this.address,this.text,this.type,this.createdAt});
-
+  ChatModel({this.userId1,this.userId2,this.username1,
+    this.username2,this.address,this.text,this.type,this.createdAt});
   ChatModel.fromJson(Map<String, dynamic> json) {
     userId1 = json['userId1'];
     userId2 = json['userId2'];
@@ -19,10 +18,7 @@ class ChatModel {
     text = json['text'];
     type = json['type'];
     createdAt = json['createdAt'];
-
   }
-
-
 }
 
 

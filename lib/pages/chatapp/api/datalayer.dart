@@ -9,14 +9,9 @@ class Datalayer{
     List<ChatModel> chatDataList = [];
     final ref = FirebaseDatabase.instance.ref();
     final snapshot = await ref.child('chat').get();
-
     if (snapshot.exists) {
-      // Convert snapshot data to a Map
       Map<String, dynamic> data = Map<String, dynamic>.from(snapshot.value as Map);
-
-      // Iterate through each entry in the data
       for (var entry in data.values) {
-        // Directly map entry to ChatModel without using json.decode
         ChatModel chatModel = ChatModel.fromJson(Map<String, dynamic>.from(entry));
         chatDataList.add(chatModel);
       }
@@ -32,25 +27,18 @@ class Datalayer{
   static Future<List<ConversationModel>?> getConversations() async {
     CollectionReference conversations = FirebaseFirestore.instance.collection('CONVERSATIONS');
     List<ConversationModel> conversationsList = [];
-
     try {
-      // Fetch all documents from the collection
       QuerySnapshot querySnapshot = await conversations.get();
-
-      // Check if data exists
       if (querySnapshot.docs.isNotEmpty) {
-        // Loop through documents and map them to ConversationModel instances
         for (var doc in querySnapshot.docs) {
-          conversationsList.add(ConversationModel.fromFirestore(doc.data() as Map<String, dynamic>));
+          conversationsList.add(ConversationModel.fromFirestore(doc.data()
+          as Map<String, dynamic>));
         }
-        print("Conversations fetched successfully: $conversationsList");
         return conversationsList;  // Return the list of ConversationModel
       } else {
-        print("No conversations available.");
         return null;
       }
     } catch (e) {
-      print("Failed to get conversations: $e");
       return null;
     }
   }
