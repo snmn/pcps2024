@@ -38,6 +38,7 @@ dependencies:
   cloud_firestore:
   shared_preferences:
   firebase_database:
+  webview_flutter:
 #  esewa_flutter_sdk:
 #    path: ./esewa_sdk/esewa_flutter_sdk
 
