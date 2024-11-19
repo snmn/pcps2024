@@ -96,8 +96,28 @@ class MapSampleState extends State<MapSample> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     _loadMapStyles();
   }
+  void createListOfMarkers() {
+    for (int i = 0; i < 10; i++) {
+      final double increment = i + 0.5; // Increment for markerId and other data
+      final marker = Marker(
+        markerId: MarkerId(increment.toString()), // Unique marker ID
+        position: LatLng(9.669111 - (0.02 * i), 80.014007 - (0.02 * i)), // Adjust position dynamically
+        infoWindow: InfoWindow(
+          title: 'T' + increment.toString(), // Proper string concatenation
+          snippet: 'A' + increment.toString(), // Proper string concatenation
+        ),
+      );
+      setState(() {
+        markers[MarkerId(increment.toString())] = marker;
+      });
+    }
+  }
+
+
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,18 +128,12 @@ class MapSampleState extends State<MapSample> {
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
           // controller.setMapStyle(_maptheme);
+          createListOfMarkers();
 
         },
-        markers: {
-          const Marker(
-            markerId: MarkerId('Patan'),
-            position: LatLng(27.6683, 85.3206),
-            infoWindow: InfoWindow(
-              title: "patan"
-            ),
 
-          )
-        },
+        markers: markers.values.toSet(),
+
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _goToTheLake,

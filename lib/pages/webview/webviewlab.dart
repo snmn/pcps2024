@@ -9,7 +9,8 @@ class Webviewlab extends StatefulWidget {
 }
 
 class _WebviewlabState extends State<Webviewlab> {
-  late WebViewController controller ;
+
+  late var controller;
   @override
   void initState() {
     // TODO: implement initState
@@ -26,10 +27,7 @@ class _WebviewlabState extends State<Webviewlab> {
           onHttpError: (HttpResponseError error) {},
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://www.kathmandu.codes/')) {
-              return NavigationDecision.prevent;
-            }
-            if (request.url.startsWith('https://www.kathmandu.codes/')) {
+            if (request.url.startsWith('https://www.youtube.com/')) {
               return NavigationDecision.prevent;
             }
             return NavigationDecision.navigate;

@@ -39,6 +39,7 @@ dependencies:
   shared_preferences:
   firebase_database:
   webview_flutter:
+  url_launcher:
 #  esewa_flutter_sdk:
 #    path: ./esewa_sdk/esewa_flutter_sdk
 
