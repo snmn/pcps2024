@@ -89,19 +89,10 @@ class MapSampleState extends State<MapSample> {
 
  var _maptheme;
 
-  Future _loadMapStyles() async {
-    _maptheme  = await rootBundle.loadString('raw/maptheme.json');
-  }
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    _loadMapStyles();
-  }
-  void createListOfMarkers() {
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+  createListOfMarkers() {
     for (int i = 0; i < 10; i++) {
-      final double increment = i + 0.5; // Increment for markerId and other data
+      final double increment = i + 0.8; // Increment for markerId and other data
       final marker = Marker(
         markerId: MarkerId(increment.toString()), // Unique marker ID
         position: LatLng(9.669111 - (0.02 * i), 80.014007 - (0.02 * i)), // Adjust position dynamically
@@ -117,7 +108,17 @@ class MapSampleState extends State<MapSample> {
   }
 
 
-  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+  Future _loadMapStyles() async {
+    _maptheme  = await rootBundle.loadString('raw/maptheme.json');
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _loadMapStyles();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,11 +128,9 @@ class MapSampleState extends State<MapSample> {
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
-          // controller.setMapStyle(_maptheme);
           createListOfMarkers();
-
+          // controller.setMapStyle(_maptheme);
         },
-
         markers: markers.values.toSet(),
 
       ),
