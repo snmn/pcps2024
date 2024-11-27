@@ -49,7 +49,6 @@ class _DetailpageState extends State<Detailpage> {
 
               ],
             ),
-
             Container(
               padding: EdgeInsets.only(top: 15,bottom: 10),
               width: size.width/1.1,

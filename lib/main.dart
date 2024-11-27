@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:lab1/pages/chatapp/loginpage.dart';
 import 'package:lab1/pages/dashboard.dart';
 import 'package:lab1/pages/dashboardpage.dart';
 import 'package:lab1/pages/loginpage.dart';
+import 'package:lab1/pages/mapclass.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:lab1/pages/urllauncher/urllauncherlab.dart';
+import 'package:lab1/pages/webview/webviewlab.dart';
+import 'firebase_options.dart';
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
+   await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -20,7 +30,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: dashboardPage(),
+      home: MapSample(),
     );
   }
 }

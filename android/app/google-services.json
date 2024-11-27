@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "608750429569",
+    "firebase_url": "https://pcps2024-5df2a-default-rtdb.firebaseio.com",
+    "project_id": "pcps2024-5df2a",
+    "storage_bucket": "pcps2024-5df2a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608750429569:android:2c4afabc364e186bbf3480",
+        "android_client_info": {
+          "package_name": "com.pcps.flutterprojectlab1.lab1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxX2paW29zHGR-sFs8iWrJ3h4gvO2Ok94"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
