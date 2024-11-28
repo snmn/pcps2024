@@ -131,6 +131,7 @@ class MapSampleState extends State<MapSample> {
           createListOfMarkers();
           // controller.setMapStyle(_maptheme);
         },
+
         markers: markers.values.toSet(),
 
       ),
